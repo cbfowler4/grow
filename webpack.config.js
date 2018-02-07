@@ -23,7 +23,6 @@ module.exports = {
     path: path.resolve(__dirname),
     filename: "bundle.js"
   },
-  // plugins: plugins,
   module: {
     loaders: [
       {

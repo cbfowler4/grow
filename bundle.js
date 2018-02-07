@@ -18284,11 +18284,13 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import HabitsList from './habits_list';
+
 var App = function App() {
   return _react2.default.createElement(
     'div',
     null,
-    'yoyoyo'
+    'yoyoywhotthatito'
   );
 };
 

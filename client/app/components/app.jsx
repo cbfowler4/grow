@@ -1,7 +1,8 @@
 import React from 'react';
+// import HabitsList from './habits_list';
 
 const App = () => (
-  <div>yoyoyo</div>
+  <div>yoyoywhotthatito</div>
 );
 
 export default App;
