@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
 // import HabitsList from './habits_list';
-import Profile from './profile';
+import Profile from './user/profile';
 import Welcome from './welcome';
 import NavBar from './navbar';
 

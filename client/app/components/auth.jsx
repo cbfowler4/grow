@@ -1,17 +1,14 @@
 import React from 'react';
 
-class Profile extends React.Component {
+class Auth extends React.Component {
   constructor (props) {
     super(props);
   }
 
-  render() {
+  render () {
     return (
       <div>
-        This is a user profile ya'll
       </div>
     );
   }
 }
-
-export default Profile;

@@ -4,8 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "watch-sass": "node-sass -w --include-path scss ./client/scss/main.scss ./client/public/css/main.css"
   },
   "repository": {
     "type": "git",
@@ -30,10 +29,9 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
     "webpack": "^3.10.0"
   },
-  "babel": {},
-  "scripts": {
-    "watch-sass": "node-sass -w --include-path scss ./client/scss/main.scss ./client/public/css/main.css"
-  }
+  "babel": {}
 }
