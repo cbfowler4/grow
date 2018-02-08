@@ -1,4 +1,5 @@
 import React from 'react';
+import AuthContainer from './auth';
 
 class Welcome extends React.Component {
   render() {
@@ -10,7 +11,7 @@ class Welcome extends React.Component {
             <h2>Build your positive habits and become the best version of yourself.</h2>
           </content>
           <aside>
-            Signup
+            <AuthContainer />
           </aside>
         </main>
       </div>
