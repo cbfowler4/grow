@@ -10,8 +10,8 @@ class NavBar extends React.Component {
 
         <div className='right'>
           <ul>
-            <li><a>Sign Up</a></li>
-            <li><a>Login</a></li>
+            <li><a href='#'>Sign Up</a></li>
+            <li><a href='#'>Login</a></li>
           </ul>
         </div>
       </nav>

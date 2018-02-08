@@ -1,4 +1,62 @@
-* {
+h1, h2, div, p, li, ul, body, html {
   list-style: none;
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  font-family: inherit; }
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: #EDF5E1; }
+  .nav .left h1 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 36px;
+    font-weight: 900;
+    letter-spacing: 3px; }
+  .nav .right ul {
+    display: flex;
+    justify-content: space-between; }
+    .nav .right ul li {
+      padding: 5px;
+      margin-left: 10px; }
+
+.welcome main {
+  background-image: url("../images/grow-background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  vertical-align: center;
+  overflow-y: hidden;
+  height: 100%;
+  padding: 200px 0 20px 0; }
+  .welcome main content {
+    height: 400px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; }
+    .welcome main content h1 {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 110px;
+      font-weight: 900;
+      letter-spacing: 3px; }
+    .welcome main content h2 {
+      font-size: 25px;
+      font-weight: 400;
+      color: rgba(0, 0, 0, 0.8);
+      letter-spacing: 1.2px; }
+
+.welcome aside {
+  margin-left: 80px;
+  height: 400px;
+  width: 350px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: #EDF5E1;
+  border-radius: 3px; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  height: 100vh; }

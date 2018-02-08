@@ -1,0 +1,28 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  background-color: #EDF5E1;
+
+  .left {
+    h1 {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 36px;
+      font-weight: 900;
+      letter-spacing: 3px;
+
+    }
+  }
+
+  .right ul {
+    display: flex;
+    justify-content: space-between;
+
+    li {
+      padding: 5px;
+      margin-left: 10px;
+
+    }
+  }
+}

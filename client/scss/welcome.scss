@@ -1,0 +1,49 @@
+
+.welcome {
+
+
+  main {
+    background-image: url('../images/grow-background.jpg');
+    background-size:cover;
+    background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: center;
+    vertical-align: center;
+    overflow-y: hidden;
+    height: 100%;
+    padding: 200px 0 20px 0;
+
+
+    content {
+      height: 400px;
+      width: 350px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      h1 {
+        font-family: 'Frank Ruhl Libre', serif;
+        font-size: 110px;
+        font-weight: 900;
+        letter-spacing: 3px;
+
+      }
+      h2 {
+        font-size: 25px;
+        font-weight: 400;
+        color: rgba(0,0,0,.8);
+        letter-spacing: 1.2px;
+      }
+    }
+  }
+
+  aside {
+    margin-left: 80px;
+    height: 400px;
+    width: 350px;
+    border: 1px solid rgba(0,0,0,.1);
+    background-color: #EDF5E1;
+    border-radius: 3px;
+  }
+}
