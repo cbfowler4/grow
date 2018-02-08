@@ -23418,12 +23418,16 @@ var App = function App() {
   return _react2.default.createElement(
     'div',
     null,
-    _react2.default.createElement(_navbar2.default, null),
     _react2.default.createElement(
       _reactRouter.Switch,
       null,
-      _react2.default.createElement(_reactRouter.Route, { path: '/users/:_id', component: _profile2.default }),
-      _react2.default.createElement(_reactRouter.Route, { path: '/', component: _welcome2.default })
+      _react2.default.createElement(_reactRouter.Route, { exact: true, path: '/', component: _welcome2.default }),
+      _react2.default.createElement(_reactRouter.Route, { path: '/', component: _navbar2.default })
+    ),
+    _react2.default.createElement(
+      _reactRouter.Switch,
+      null,
+      _react2.default.createElement(_reactRouter.Route, { path: '/users/:_id', component: _profile2.default })
     )
   );
 };
