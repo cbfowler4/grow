@@ -1,8 +1,11 @@
-h1, h2, div, p, li, ul, body, html {
+h1, h2, div, p, li, ul, body, html, aside, main {
+  box-sizing: border-box;
   list-style: none;
   margin: 0;
   padding: 0;
-  font-family: inherit; }
+  font-family: inherit;
+  box-shadow: none;
+  border: none; }
 
 .nav {
   display: flex;
@@ -47,8 +50,9 @@ h1, h2, div, p, li, ul, body, html {
 
 .welcome aside {
   margin-left: 80px;
-  height: 400px;
-  width: 350px;
+  margin-bottom: 50px;
+  height: 440px;
+  width: 380px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   background-color: #EDF5E1;
   border-radius: 3px; }
@@ -81,6 +85,39 @@ h1, h2, div, p, li, ul, body, html {
     .profile-photos .user .avatar img {
       height: 90%;
       width: 90%; }
+
+.auth-aside {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px; }
+  .auth-aside h1 {
+    font-size: 20px; }
+  .auth-aside form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0; }
+  .auth-aside input {
+    height: 25px;
+    width: 260px;
+    padding: 7px;
+    border-radius: 3px;
+    font-size: 15px;
+    margin: 20px 0; }
+  .auth-aside button {
+    cursor: pointer;
+    height: 40px;
+    width: 140px;
+    font-size: 15px;
+    border-radius: 3px;
+    margin: 15px 0; }
+  .auth-aside a {
+    color: blue;
+    cursor: pointer; }
 
 html {
   height: 100%; }

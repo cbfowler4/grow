@@ -1,7 +1,5 @@
 
 .welcome {
-
-
   main {
 
     display: flex;
@@ -36,8 +34,9 @@
 
   aside {
     margin-left: 80px;
-    height: 400px;
-    width: 350px;
+    margin-bottom: 50px;
+    height: 440px;
+    width: 380px;
     border: 1px solid rgba(0,0,0,.1);
     background-color: #EDF5E1;
     border-radius: 3px;

@@ -43263,40 +43263,30 @@ var Auth = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'auth-aside' },
+        _react2.default.createElement(
+          'h1',
+          null,
+          'Enter your information below'
+        ),
         _react2.default.createElement(
           'form',
           { onSubmit: this.handleSubmit },
-          _react2.default.createElement(
-            'label',
-            null,
-            'email',
-            _react2.default.createElement('input', {
-              type: 'email',
-              placeholder: 'Email',
-              value: this.state.email,
-              onChange: this.handleChange("email") })
-          ),
-          this.authType === "signup" && _react2.default.createElement(
-            'label',
-            null,
-            'Username',
-            _react2.default.createElement('input', {
-              type: 'text',
-              placeholder: 'Username',
-              value: this.state.username,
-              onChange: this.handleChange("username") })
-          ),
-          _react2.default.createElement(
-            'label',
-            null,
-            'Password',
-            _react2.default.createElement('input', {
-              type: 'password',
-              placeholder: 'Password',
-              value: this.state.password,
-              onChange: this.handleChange("password") })
-          ),
+          _react2.default.createElement('input', {
+            type: 'email',
+            placeholder: 'Email',
+            value: this.state.email,
+            onChange: this.handleChange("email") }),
+          this.authType === "signup" && _react2.default.createElement('input', {
+            type: 'text',
+            placeholder: 'Username',
+            value: this.state.username,
+            onChange: this.handleChange("username") }),
+          _react2.default.createElement('input', {
+            type: 'password',
+            placeholder: 'Password',
+            value: this.state.password,
+            onChange: this.handleChange("password") }),
           _react2.default.createElement(
             'button',
             null,

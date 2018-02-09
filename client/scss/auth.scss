@@ -1,0 +1,44 @@
+
+.auth-aside {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+
+  h1 {
+    font-size: 20px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+  }
+
+  input {
+    height: 25px;
+    width: 260px;
+    padding: 7px;
+    border-radius: 3px;
+    font-size: 15px;
+    margin: 20px 0;
+  }
+
+  button {
+    cursor: pointer;
+    height: 40px;
+    width: 140px;
+    font-size: 15px;
+    border-radius: 3px;
+    margin: 15px 0 ;
+  }
+
+  a {
+    color: blue;
+    cursor: pointer;
+  }
+}

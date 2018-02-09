@@ -64,33 +64,28 @@ class Auth extends React.Component {
 
   render () {
     return (
-      <div>
+      <div className='auth-aside'>
+        <h1>Enter your information below</h1>
         <form onSubmit={this.handleSubmit}>
-          <label>email
-            <input
-              type="email"
-              placeholder="Email"
-              value={this.state.email}
-              onChange={this.handleChange("email")}/>
-          </label>
+          <input
+            type="email"
+            placeholder="Email"
+            value={this.state.email}
+            onChange={this.handleChange("email")}/>
 
           { this.authType === "signup" &&
-            <label>Username
-              <input
-                type="text"
-                placeholder="Username"
-                value={this.state.username}
-                onChange={this.handleChange("username")}/>
-            </label>
+            <input
+              type="text"
+              placeholder="Username"
+              value={this.state.username}
+              onChange={this.handleChange("username")}/>
           }
 
-          <label>Password
-            <input
-              type="password"
-              placeholder="Password"
-              value={this.state.password}
-              onChange={this.handleChange("password")}/>
-          </label>
+          <input
+            type="password"
+            placeholder="Password"
+            value={this.state.password}
+            onChange={this.handleChange("password")}/>
 
           <button>{this.authType === "signup" ? "Sign Up!" : "Login!"}</button>
         </form>
