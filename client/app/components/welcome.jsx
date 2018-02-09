@@ -2,6 +2,8 @@ import React from 'react';
 import AuthContainer from './auth';
 
 class Welcome extends React.Component {
+
+
   render() {
     return (
       <div className='welcome'>

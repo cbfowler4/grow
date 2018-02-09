@@ -25931,10 +25931,15 @@ var _ui_reducer = __webpack_require__(123);
 
 var _ui_reducer2 = _interopRequireDefault(_ui_reducer);
 
+var _session_reducer = __webpack_require__(131);
+
+var _session_reducer2 = _interopRequireDefault(_session_reducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _redux.combineReducers)({
-  ui: _ui_reducer2.default
+  ui: _ui_reducer2.default,
+  session: _session_reducer2.default
 });
 
 /***/ }),
@@ -43147,6 +43152,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(112);
 
+var _auth_actions = __webpack_require__(129);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -43164,7 +43171,14 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    signup: function signup(user) {
+      return dispatch((0, _auth_actions.signup)(user));
+    },
+    login: function login(user) {
+      return dispatch((0, _auth_actions.login)(user));
+    }
+  };
 };
 
 var Auth = function (_React$Component) {
@@ -43189,7 +43203,11 @@ var Auth = function (_React$Component) {
   _createClass(Auth, [{
     key: 'handleSubmit',
     value: function handleSubmit(e) {
-      console.log("im submitted");
+      if (this.authType === "signup") {
+        this.props.signup(e.target.value);
+      } else {
+        this.props.login(e.target.value);
+      }
     }
   }, {
     key: 'handleChange',
@@ -43238,6 +43256,139 @@ var Auth = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Auth);
+
+/***/ }),
+/* 128 */,
+/* 129 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.logout = exports.login = exports.signup = exports.logoutCurrentUser = exports.receiveCurrentUser = exports.receiveErrors = exports.RECEIVE_CURRENT_USER = exports.RECEIVE_AUTH_ERRORS = undefined;
+
+var _auth_util = __webpack_require__(130);
+
+var _auth_util2 = _interopRequireDefault(_auth_util);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var RECEIVE_AUTH_ERRORS = exports.RECEIVE_AUTH_ERRORS = "RECEIVE_AUTH_ERRORS";
+var RECEIVE_CURRENT_USER = exports.RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
+
+var receiveErrors = exports.receiveErrors = function receiveErrors(errors) {
+  return {
+    type: RECEIVE_AUTH_ERRORS,
+    errors: errors
+  };
+};
+
+var receiveCurrentUser = exports.receiveCurrentUser = function receiveCurrentUser(currentUser) {
+  return {
+    type: RECEIVE_CURRENT_USER,
+    currentUser: currentUser
+  };
+};
+
+var logoutCurrentUser = exports.logoutCurrentUser = function logoutCurrentUser() {
+  return {
+    type: RECEIVE_CURRENT_USER,
+    currentUser: null
+  };
+};
+
+var signup = exports.signup = function signup(user) {
+  return function (dispatch) {
+    _auth_util2.default.signup(user).then(function (response) {
+      dispatch(receiveCurrentUser(user));
+    }, function (errors) {
+      dispatch(RECEIVE_AUTH_ERRORS);
+    });
+  };
+};
+
+var login = exports.login = function login(user) {
+  return function (dispatch) {
+    _auth_util2.default.login(user).then(function (response) {
+      dispatch(receiveCurrentUser(user));
+    }, function (errors) {
+      dispatch(RECEIVE_AUTH_ERRORS);
+    });
+  };
+};
+
+var logout = exports.logout = function logout() {
+  return function (dispatch) {
+    _auth_util2.default.logout().then(function (response) {
+      dispatch(logoutCurrentUser());
+    }, function (errors) {
+      dispatch(RECEIVE_AUTH_ERRORS);
+    });
+  };
+};
+
+/***/ }),
+/* 130 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var signup = exports.signup = function signup(user) {
+  $.ajax({
+    url: '/api/users',
+    method: 'post',
+    data: user
+  });
+};
+
+var login = exports.login = function login(user) {
+  $.ajax({
+    url: '/api/session',
+    method: 'post',
+    data: user
+  });
+};
+
+var logout = exports.logout = function logout() {
+  $.ajax({
+    url: '/api/session',
+    method: 'delete'
+  });
+};
+
+/***/ }),
+/* 131 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _auth_actions = __webpack_require__(129);
+
+var defaultState = { currentUser: null };
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;
+  var action = arguments[1];
+
+  switch (action.type) {
+    case _auth_actions.RECEIVE_CURRENT_USER:
+      return Object.assign({}, state, { currentUser: action.currentUser });
+    default:
+      return state;
+  }
+};
 
 /***/ })
 /******/ ]);

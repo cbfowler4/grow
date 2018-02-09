@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { signup, login } from '../actions/auth_actions';
 
 const mapStateToProps = state => {
   return {
@@ -9,7 +10,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-
+    signup: (user) => dispatch(signup(user)),
+    login: (user) => dispatch(login(user)),
   };
 };
 
@@ -28,7 +30,11 @@ class Auth extends React.Component {
   }
 
   handleSubmit(e) {
-    console.log("im submitted");
+    if (this.authType === "signup") {
+      this.props.signup(e.target.value);
+    } else {
+      this.props.login(e.target.value);
+    }
   }
 
   handleChange(field) {

@@ -88,4 +88,4 @@ h1, h2, div, p, li, ul, body, html {
 
 body {
   font-family: 'Nunito', sans-serif;
-  height: 100vh; }
+  height: inherit; }
