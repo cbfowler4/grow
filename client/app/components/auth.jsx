@@ -36,9 +36,9 @@ class Auth extends React.Component {
 
   handleSubmit(e) {
     if (this.authType === "signup") {
-      this.props.signup(e.target.value);
+      this.props.signup(this.state);
     } else {
-      this.props.login(e.target.value);
+      this.props.login(this.state);
     }
   }
 

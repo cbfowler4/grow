@@ -1,4 +1,4 @@
-import AuthUtil from '../util/auth_util';
+import * as AuthUtil from '../util/auth_util';
 
 export const RECEIVE_AUTH_ERRORS = "RECEIVE_AUTH_ERRORS";
 export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
