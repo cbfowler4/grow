@@ -2,8 +2,21 @@
 @import 'navbar';
 @import 'welcome';
 @import 'profile';
+@import 'auth';
+
+
+html {
+  height: 100%;
+}
 
 body {
   font-family: 'Nunito', sans-serif;
-  height: inherit;
+  height: 100%;
+
+}
+
+.on-welcome {
+  background-image: url('../images/grow-background.jpg');
+  background-size:cover;
+  background-repeat: no-repeat;
 }

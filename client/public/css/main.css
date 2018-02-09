@@ -23,13 +23,9 @@ h1, h2, div, p, li, ul, body, html {
       margin-left: 10px; }
 
 .welcome main {
-  background-image: url("../images/grow-background.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
   display: flex;
   justify-content: center;
   vertical-align: center;
-  overflow-y: hidden;
   height: 100%;
   padding: 200px 0 20px 0; }
   .welcome main content {
@@ -86,6 +82,14 @@ h1, h2, div, p, li, ul, body, html {
       height: 90%;
       width: 90%; }
 
+html {
+  height: 100%; }
+
 body {
   font-family: 'Nunito', sans-serif;
-  height: inherit; }
+  height: 100%; }
+
+.on-welcome {
+  background-image: url("../images/grow-background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat; }

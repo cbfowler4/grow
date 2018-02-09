@@ -3,6 +3,15 @@ import AuthContainer from './auth';
 
 class Welcome extends React.Component {
 
+  componentDidMount() {
+    const body = document.getElementsByTagName('body')[0];
+    body.classList.add('on-welcome');
+  }
+
+  componentWillUnmount() {
+    const body = document.getElementsByTagName('body')[0];
+    body.classList.remove('on-welcome');
+  }
 
   render() {
     return (

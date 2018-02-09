@@ -23517,6 +23517,18 @@ var Welcome = function (_React$Component) {
   }
 
   _createClass(Welcome, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var body = document.getElementsByTagName('body')[0];
+      body.classList.add('on-welcome');
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      var body = document.getElementsByTagName('body')[0];
+      body.classList.remove('on-welcome');
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -25969,7 +25981,7 @@ exports.default = function () {
     case _ui_actions.SHOW_LOGIN:
       return (0, _lodash.merge)({}, state, { auth: "login" });
     case _ui_actions.SHOW_SIGNUP:
-      return (0, _lodash.merge)({}, state, { auth: "login" });
+      return (0, _lodash.merge)({}, state, { auth: "signup" });
     default:
       return state;
   }
@@ -43154,6 +43166,8 @@ var _reactRedux = __webpack_require__(112);
 
 var _auth_actions = __webpack_require__(129);
 
+var _ui_actions = __webpack_require__(126);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -43177,6 +43191,12 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     login: function login(user) {
       return dispatch((0, _auth_actions.login)(user));
+    },
+    showLogin: function showLogin() {
+      return dispatch((0, _ui_actions.showLogin)());
+    },
+    showSignup: function showSignup() {
+      return dispatch((0, _ui_actions.showSignup)());
     }
   };
 };
@@ -43191,12 +43211,14 @@ var Auth = function (_React$Component) {
 
     _this.authType = props.authType;
     _this.state = {
+      email: "",
       username: "",
       password: ""
     };
 
     _this.handleChange = _this.handleChange.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
+    _this.handleSwitchTo = _this.handleSwitchTo.bind(_this);
     return _this;
   }
 
@@ -43219,6 +43241,24 @@ var Auth = function (_React$Component) {
       };
     }
   }, {
+    key: 'handleSwitchTo',
+    value: function handleSwitchTo(toAuthType) {
+      var _this3 = this;
+
+      return function () {
+        if (toAuthType === "signup") {
+          _this3.props.showSignup();
+        } else {
+          _this3.props.showLogin();
+        }
+      };
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      this.authType = nextProps.authType;
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -43228,6 +43268,16 @@ var Auth = function (_React$Component) {
           'form',
           { onSubmit: this.handleSubmit },
           _react2.default.createElement(
+            'label',
+            null,
+            'email',
+            _react2.default.createElement('input', {
+              type: 'email',
+              placeholder: 'Email',
+              value: this.state.email,
+              onChange: this.handleChange("email") })
+          ),
+          this.authType === "signup" && _react2.default.createElement(
             'label',
             null,
             'Username',
@@ -43246,7 +43296,36 @@ var Auth = function (_React$Component) {
               placeholder: 'Password',
               value: this.state.password,
               onChange: this.handleChange("password") })
+          ),
+          _react2.default.createElement(
+            'button',
+            null,
+            this.authType === "signup" ? "Sign Up!" : "Login!"
           )
+        ),
+        this.authType === "signup" && _react2.default.createElement(
+          'span',
+          null,
+          'Already a member of Grow? ',
+          _react2.default.createElement(
+            'a',
+            {
+              onClick: this.handleSwitchTo("login") },
+            'Login!'
+          ),
+          ' '
+        ),
+        this.authType === "login" && _react2.default.createElement(
+          'span',
+          null,
+          'Not a member of Grow? ',
+          _react2.default.createElement(
+            'a',
+            {
+              onClick: this.handleSwitchTo("signup") },
+            'Sign up!'
+          ),
+          ' '
         )
       );
     }

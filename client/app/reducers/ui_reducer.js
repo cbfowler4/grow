@@ -10,7 +10,7 @@ export default (state = defaultState, action) => {
     case SHOW_LOGIN:
       return merge({}, state, {auth: "login"});
     case SHOW_SIGNUP:
-      return merge({}, state, {auth: "login"});
+      return merge({}, state, {auth: "signup"});
     default:
       return state;
   }
