@@ -4,10 +4,10 @@ const sessionUtil = require('../util/session_util');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema ({
-  username: String,
-  password_digest: String,
-  session_token: String,
-  email: String,
+  username: {type: String, required: true},
+  password_digest: {type: String, required: true},
+  session_token: {type: String, required: true},
+  email: {type: String, required: true},
   created: {type: Date, default: Date.now}
 });
 
@@ -20,7 +20,7 @@ const createUser = (user) => {
   password_digest: generatePasswordDigest(user.password)
   });
 
-  console.log(newUser);
+  newUser.save();
 };
 
 const generatePasswordDigest = (pswd) => {
