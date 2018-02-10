@@ -10,5 +10,8 @@ const generateSessionToken = () => {
   return st;
 };
 
+const login = (user) => {
+  
+};
 
 module.exports = { generateSessionToken };
