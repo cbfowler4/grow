@@ -13,7 +13,8 @@ const userSchema = new Schema ({
   password_digest: {type: String, required: true},
   session_token: {type: String, required: true, unique: true},
   email: {type: String, required: true, unique: true},
-  created: {type: Date, default: Date.now}
+  created: {type: Date, default: Date.now},
+  habits: Array
 });
 
 const User = mongoose.model('User', userSchema);

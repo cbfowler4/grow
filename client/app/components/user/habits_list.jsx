@@ -9,7 +9,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    // getUserHabits: (user) => dispatch(getUserHabits(user)),
+    getUserHabits: (user) => dispatch(getUserHabits(user)),
   };
 };
 
@@ -20,7 +20,7 @@ class HabitsList extends React.Component {
   }
 
   componentDidMount() {
-    // this.habits = getUserHabits();
+    this.habits = getUserHabits();
   }
 
   render() {

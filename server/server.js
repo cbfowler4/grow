@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const app = express();
 
-const AuthUtil = require('./models/auth_model');
+const AuthUtil = require('./models/user_model');
 
 app.use(express.static('client/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
