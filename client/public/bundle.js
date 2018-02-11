@@ -43641,17 +43641,41 @@ var HabitsList = function (_React$Component) {
               value: this.state.description,
               onChange: this.handleChange('description') }),
             _react2.default.createElement(
-              'select',
-              null,
+              'div',
+              { id: 'cadence' },
               _react2.default.createElement(
-                'option',
-                { value: 'daily' },
-                'Daily'
+                'span',
+                null,
+                'To be completed every '
               ),
               _react2.default.createElement(
-                'option',
-                { value: 'weekly' },
-                'Weekly'
+                'div',
+                null,
+                _react2.default.createElement('input', { type: 'number' }),
+                _react2.default.createElement(
+                  'select',
+                  null,
+                  _react2.default.createElement(
+                    'option',
+                    { value: 'hours' },
+                    'Hours'
+                  ),
+                  _react2.default.createElement(
+                    'option',
+                    { value: 'days' },
+                    'Days'
+                  ),
+                  _react2.default.createElement(
+                    'option',
+                    { value: 'weeks' },
+                    'Weeks'
+                  ),
+                  _react2.default.createElement(
+                    'option',
+                    { value: 'months' },
+                    'Months'
+                  )
+                )
               )
             ),
             _react2.default.createElement(
@@ -43677,7 +43701,7 @@ var HabitsList = function (_React$Component) {
 
         return _react2.default.createElement(
           'ul',
-          null,
+          { className: 'habits-list' },
           'start of habits list',
           habitsList,
           addHabit

@@ -86,6 +86,31 @@ h1, h2, div, p, li, ul, body, html, aside, main {
       height: 90%;
       width: 90%; }
 
+.habits-list {
+  padding: 20px;
+  border: 1px solid black;
+  width: 400px;
+  margin: 30px; }
+  .habits-list ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; }
+
+.add-habit-shown {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
+  .add-habit-shown form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; }
+    .add-habit-shown form input, .add-habit-shown form textarea, .add-habit-shown form button, .add-habit-shown form #cadence {
+      margin: 15px 0; }
+  .add-habit-shown #cadence {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; }
+
 .auth-aside {
   height: 100%;
   display: flex;

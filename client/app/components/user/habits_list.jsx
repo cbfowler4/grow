@@ -77,10 +77,19 @@ class HabitsList extends React.Component {
               value={this.state.description}
               onChange={this.handleChange('description')}></textarea>
 
-            <select>
-              <option value="daily">Daily</option>
-              <option value="weekly">Weekly</option>
-            </select>
+
+            <div id='cadence'>
+              <span>To be completed every </span>
+              <div>
+                <input type="number"></input>
+                <select>
+                  <option value="hours">Hours</option>
+                  <option value="days">Days</option>
+                  <option value="weeks">Weeks</option>
+                  <option value="months">Months</option>
+                </select>
+              </div>
+            </div>
             <button onClick={this.handleHabitSubmit}>Add Habit</button>
           </form>
           <button onClick={this.toggleShowAddition}>Hide habit addition</button>
@@ -92,7 +101,7 @@ class HabitsList extends React.Component {
       );
 
       return (
-        <ul>start of habits list
+        <ul className='habits-list'>start of habits list
           {habitsList}
           {addHabit}
         </ul>
