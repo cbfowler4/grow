@@ -22,9 +22,7 @@ app.post('/api/users', (req, res) => {
 });
 
 app.get('/api/users/:_userId', (req, res) => {
-  UserModel.getHabits(req.params._userId).then((response)=>{
-    console.log('response');
-    console.log(response);
+  UserModel.getUser(req.params._userId).then((response)=>{
     res.send(response);
   });
 });

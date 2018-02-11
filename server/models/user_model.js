@@ -43,10 +43,10 @@ const isUser = () => {
   //     res.locals.user = user;
 };
 
-const getHabits = (userId) => {
-  return User.findById(userId, "habits", function(err, res) {
-    return res.habits;
+const getUser = (userId) => {
+  return User.findById(userId, "username habits", function(err, res) {
+    return res;
   });
 };
 
-module.exports = { createUser, isUser, getHabits};
+module.exports = { createUser, isUser, getUser};

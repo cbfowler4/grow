@@ -1,29 +1,29 @@
 import * as UserUtil from '../util/user_util';
 
-export const RECEIVE_HABITS = 'RECEIVE_HABITS';
-export const RECEIVE_HABITS_ERRORS = 'RECEIVE_HABITS_ERRORS';
+export const RECEIVE_USER = 'RECEIVE_USER';
+export const RECEIVE_USER_ERRORS = 'RECEIVE_USER_ERRORS';
 
-export const receiveHabits = (response) => {
+export const receiveUserInfo = (response) => {
   return ({
-    type: RECEIVE_HABITS,
+    type: RECEIVE_USER,
     response
   });
 };
 
-export const receiveHabitsErrors = (errors) => {
+export const receiveUserInfoErrors = (errors) => {
   return ({
-    type: RECEIVE_HABITS_ERRORS,
+    type: RECEIVE_USER_ERRORS,
     errors
   });
 };
 
-export const getUserHabits = (userId) => {
+export const getUserInfo = (userId) => {
   return (dispatch) => {
-    UserUtil.getUserHabits(userId).then((response) => {
-      dispatch(receiveHabits(response));
+    UserUtil.getUserInfo(userId).then((response) => {
+      dispatch(receiveUserInfo(response));
     },
     (errors) => {
-      dispatch(receiveHabitsErrors(errors));
+      dispatch(receiveUserInfoErrors(errors));
     });
   };
 };

@@ -4004,6 +4004,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 var SHOW_LOGIN = exports.SHOW_LOGIN = "SHOW_LOGIN";
 var SHOW_SIGNUP = exports.SHOW_SIGNUP = "SHOW_SIGNUP";
+var HIDE_ADD_HABIT = exports.HIDE_ADD_HABIT = "HIDE_ADD_HABIT";
+var SHOW_ADD_HABIT = exports.SHOW_ADD_HABIT = "SHOW_ADD_HABIT";
 
 var showLogin = exports.showLogin = function showLogin() {
   return {
@@ -4014,6 +4016,17 @@ var showLogin = exports.showLogin = function showLogin() {
 var showSignup = exports.showSignup = function showSignup() {
   return {
     type: SHOW_SIGNUP
+  };
+};
+
+var showAddHabit = exports.showAddHabit = function showAddHabit() {
+  return {
+    type: SHOW_ADD_HABIT
+  };
+};
+var hideAddHabit = exports.hideAddHabit = function hideAddHabit() {
+  return {
+    type: HIDE_ADD_HABIT
   };
 };
 
@@ -24545,6 +24558,10 @@ var _habits_list = __webpack_require__(130);
 
 var _habits_list2 = _interopRequireDefault(_habits_list);
 
+var _user_actions = __webpack_require__(132);
+
+var _reactRedux = __webpack_require__(45);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24553,16 +24570,40 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  var userId = ownProps.match.params._id;
+  return {
+    user: state.entities.users[userId]
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    getUserInfo: function getUserInfo(user) {
+      return dispatch((0, _user_actions.getUserInfo)(user));
+    }
+  };
+};
+
 var Profile = function (_React$Component) {
   _inherits(Profile, _React$Component);
 
   function Profile(props) {
     _classCallCheck(this, Profile);
 
-    return _possibleConstructorReturn(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).call(this, props));
+
+    _this.userId = props.match.params._id;
+
+    return _this;
   }
 
   _createClass(Profile, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.props.getUserInfo(this.userId);
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -24570,7 +24611,7 @@ var Profile = function (_React$Component) {
         { className: 'profile' },
         _react2.default.createElement(_profile_photos2.default, null),
         'yo im a profile',
-        _react2.default.createElement(_habits_list2.default, null)
+        _react2.default.createElement(_habits_list2.default, { user: this.props.user })
       );
     }
   }]);
@@ -24578,7 +24619,7 @@ var Profile = function (_React$Component) {
   return Profile;
 }(_react2.default.Component);
 
-exports.default = Profile;
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Profile);
 
 /***/ }),
 /* 94 */
@@ -26253,7 +26294,8 @@ var _lodash = __webpack_require__(125);
 var _ui_actions = __webpack_require__(55);
 
 var defaultState = {
-  auth: "signup"
+  auth: "signup",
+  addHabit: false
 };
 
 exports.default = function () {
@@ -26265,6 +26307,10 @@ exports.default = function () {
       return (0, _lodash.merge)({}, state, { auth: "login" });
     case _ui_actions.SHOW_SIGNUP:
       return (0, _lodash.merge)({}, state, { auth: "signup" });
+    case _ui_actions.SHOW_ADD_HABIT:
+      return (0, _lodash.merge)({}, state, { addHabit: true });
+    case _ui_actions.HIDE_ADD_HABIT:
+      return (0, _lodash.merge)({}, state, { addHabit: false });
     default:
       return state;
   }
@@ -43490,11 +43536,13 @@ var _habit2 = _interopRequireDefault(_habit);
 
 var _reactRedux = __webpack_require__(45);
 
-var _user_actions = __webpack_require__(132);
+var _ui_actions = __webpack_require__(55);
 
 var _reactRouterDom = __webpack_require__(69);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -43503,13 +43551,18 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var mapStateToProps = function mapStateToProps(state) {
-  return {};
+  return {
+    addHabitStatus: state.ui.addHabit
+  };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    getUserHabits: function getUserHabits(user) {
-      return dispatch((0, _user_actions.getUserHabits)(user));
+    showAddHabit: function showAddHabit() {
+      return dispatch((0, _ui_actions.showAddHabit)());
+    },
+    hideAddHabit: function hideAddHabit() {
+      return dispatch((0, _ui_actions.hideAddHabit)());
     }
   };
 };
@@ -43522,30 +43575,116 @@ var HabitsList = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (HabitsList.__proto__ || Object.getPrototypeOf(HabitsList)).call(this, props));
 
-    _this.habits = [];
-    _this.userId = props.match.params._id;
+    _this.defaultState = {
+      title: "",
+      description: ""
+    };
+    _this.state = _this.defaultState;
 
+    _this.toggleShowAddition = _this.toggleShowAddition.bind(_this);
+    _this.handleChange = _this.handleChange.bind(_this);
+    _this.handleHabitSubmit = _this.handleHabitSubmit.bind(_this);
     return _this;
   }
 
   _createClass(HabitsList, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.habits = this.props.getUserHabits(this.userId);
+    key: 'toggleShowAddition',
+    value: function toggleShowAddition(e) {
+      if (this.props.addHabitStatus) {
+        this.props.hideAddHabit();
+      } else {
+        this.props.showAddHabit();
+      }
+      e.stopPropagation();
     }
+  }, {
+    key: 'handleChange',
+    value: function handleChange(field) {
+      var _this2 = this;
+
+      return function (e) {
+        _this2.setState(_defineProperty({}, field, e.target.value));
+      };
+    }
+  }, {
+    key: 'handleHabitSubmit',
+    value: function handleHabitSubmit(e) {
+      console.log('submitting...');
+      console.log(this.state);
+      this.setState(this.defaultState);
+      e.stopPropagation();
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {}
   }, {
     key: 'render',
     value: function render() {
-      var habitsList = this.habits.map(function (habit) {
-        return _react2.default.createElement(_habit2.default, { habit: habit });
-      });
+      if (this.props.user) {
+        var habitsList = this.props.user.habits.map(function (habit) {
+          return _react2.default.createElement(_habit2.default, { habit: habit });
+        });
 
-      return _react2.default.createElement(
-        'ul',
-        null,
-        'start of habits list',
-        habitsList
-      );
+        var addHabit = this.props.addHabitStatus ? _react2.default.createElement(
+          'div',
+          { className: 'add-habit-shown' },
+          _react2.default.createElement(
+            'form',
+            null,
+            _react2.default.createElement('input', {
+              type: 'text',
+              placeholder: 'Enter Habit',
+              value: this.state.title,
+              onChange: this.handleChange('title') }),
+            _react2.default.createElement('textarea', {
+              placeholder: 'Enter a short description (optional)...',
+              value: this.state.description,
+              onChange: this.handleChange('description') }),
+            _react2.default.createElement(
+              'select',
+              null,
+              _react2.default.createElement(
+                'option',
+                { value: 'daily' },
+                'Daily'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'weekly' },
+                'Weekly'
+              )
+            ),
+            _react2.default.createElement(
+              'button',
+              { onClick: this.handleHabitSubmit },
+              'Add Habit'
+            )
+          ),
+          _react2.default.createElement(
+            'button',
+            { onClick: this.toggleShowAddition },
+            'Hide habit addition'
+          )
+        ) : _react2.default.createElement(
+          'div',
+          { className: 'add-habit-hidden' },
+          _react2.default.createElement(
+            'button',
+            { onClick: this.toggleShowAddition },
+            'Add a habit'
+          )
+        );
+
+        return _react2.default.createElement(
+          'ul',
+          null,
+          'start of habits list',
+          habitsList,
+          addHabit
+        );
+      } else {
+        return null;
+      }
     }
   }]);
 
@@ -43614,7 +43753,7 @@ exports.default = Habit;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getUserHabits = exports.receiveHabitsErrors = exports.receiveHabits = exports.RECEIVE_HABITS_ERRORS = exports.RECEIVE_HABITS = undefined;
+exports.getUserInfo = exports.receiveUserInfoErrors = exports.receiveUserInfo = exports.RECEIVE_USER_ERRORS = exports.RECEIVE_USER = undefined;
 
 var _user_util = __webpack_require__(133);
 
@@ -43622,29 +43761,29 @@ var UserUtil = _interopRequireWildcard(_user_util);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-var RECEIVE_HABITS = exports.RECEIVE_HABITS = 'RECEIVE_HABITS';
-var RECEIVE_HABITS_ERRORS = exports.RECEIVE_HABITS_ERRORS = 'RECEIVE_HABITS_ERRORS';
+var RECEIVE_USER = exports.RECEIVE_USER = 'RECEIVE_USER';
+var RECEIVE_USER_ERRORS = exports.RECEIVE_USER_ERRORS = 'RECEIVE_USER_ERRORS';
 
-var receiveHabits = exports.receiveHabits = function receiveHabits(response) {
+var receiveUserInfo = exports.receiveUserInfo = function receiveUserInfo(response) {
   return {
-    type: RECEIVE_HABITS,
+    type: RECEIVE_USER,
     response: response
   };
 };
 
-var receiveHabitsErrors = exports.receiveHabitsErrors = function receiveHabitsErrors(errors) {
+var receiveUserInfoErrors = exports.receiveUserInfoErrors = function receiveUserInfoErrors(errors) {
   return {
-    type: RECEIVE_HABITS_ERRORS,
+    type: RECEIVE_USER_ERRORS,
     errors: errors
   };
 };
 
-var getUserHabits = exports.getUserHabits = function getUserHabits(userId) {
+var getUserInfo = exports.getUserInfo = function getUserInfo(userId) {
   return function (dispatch) {
-    UserUtil.getUserHabits(userId).then(function (response) {
-      dispatch(receiveHabits(response));
+    UserUtil.getUserInfo(userId).then(function (response) {
+      dispatch(receiveUserInfo(response));
     }, function (errors) {
-      dispatch(receiveHabitsErrors(errors));
+      dispatch(receiveUserInfoErrors(errors));
     });
   };
 };
@@ -43659,7 +43798,7 @@ var getUserHabits = exports.getUserHabits = function getUserHabits(userId) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var getUserHabits = exports.getUserHabits = function getUserHabits(userId) {
+var getUserInfo = exports.getUserInfo = function getUserInfo(userId) {
   return $.ajax({
     url: '/api/users/' + userId,
     method: 'get'
@@ -43712,8 +43851,8 @@ exports.default = function () {
   var action = arguments[1];
 
   switch (action.type) {
-    case _user_actions.RECEIVE_HABITS:
-      return (0, _lodash.merge)({}, state, _defineProperty({}, action.response._id, action.response.habits));
+    case _user_actions.RECEIVE_USER:
+      return (0, _lodash.merge)({}, state, _defineProperty({}, action.response._id, action.response));
     default:
       return state;
   }
