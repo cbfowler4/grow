@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const app = express();
 
-const AuthUtil = require('./models/user_model');
+const UserModel = require('./models/user_model');
 
 app.use(express.static('client/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -18,8 +18,15 @@ app.get("/", (req, res) => {
 });
 
 app.post('/api/users', (req, res) => {
-  console.log(req.session.cookie);
-  AuthUtil.createUser(req.body);
+  UserModel.createUser(req.body);
+});
+
+app.get('/api/users/:_userId', (req, res) => {
+  UserModel.getHabits(req.params._userId).then((response)=>{
+    console.log('response');
+    console.log(response);
+    res.send(response);
+  });
 });
 
 app.listen(3000);

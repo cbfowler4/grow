@@ -1,5 +1,6 @@
 import React from 'react';
 import ProfilePhotos from './profile_photos';
+import HabitsListContainer from './habits_list';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class Profile extends React.Component {
       <div className='profile'>
         <ProfilePhotos />
         yo im a profile
+        <HabitsListContainer />
       </div>
     );
   }

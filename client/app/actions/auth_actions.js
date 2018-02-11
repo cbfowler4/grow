@@ -31,7 +31,7 @@ export const signup = (user) => {
       dispatch(receiveCurrentUser(user));
     },
     (errors) => {
-      dispatch(RECEIVE_AUTH_ERRORS);
+      dispatch(receiveErrors(errors));
     });
   };
 };
@@ -42,7 +42,7 @@ export const login = (user) => {
       dispatch(receiveCurrentUser(user));
     },
     (errors) => {
-      dispatch(RECEIVE_AUTH_ERRORS);
+      dispatch(receiveErrors(errors));
     });
   };
 };
@@ -53,7 +53,7 @@ export const logout = () => {
       dispatch(logoutCurrentUser());
     },
     (errors) => {
-      dispatch(RECEIVE_AUTH_ERRORS);
+      dispatch(receiveErrors(errors));
     });
   };
 };

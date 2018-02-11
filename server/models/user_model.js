@@ -14,7 +14,7 @@ const userSchema = new Schema ({
   session_token: {type: String, required: true, unique: true},
   email: {type: String, required: true, unique: true},
   created: {type: Date, default: Date.now},
-  habits: Array
+  habits: {type: Array, default: []}
 });
 
 const User = mongoose.model('User', userSchema);
@@ -43,4 +43,10 @@ const isUser = () => {
   //     res.locals.user = user;
 };
 
-module.exports = { createUser, isUser};
+const getHabits = (userId) => {
+  return User.findById(userId, "habits", function(err, res) {
+    return res.habits;
+  });
+};
+
+module.exports = { createUser, isUser, getHabits};
