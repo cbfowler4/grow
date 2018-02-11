@@ -104,7 +104,7 @@ h1, h2, div, p, li, ul, body, html, aside, main {
     display: flex;
     flex-direction: column;
     justify-content: space-between; }
-    .add-habit-shown form input, .add-habit-shown form textarea, .add-habit-shown form button, .add-habit-shown form #cadence {
+    .add-habit-shown form input, .add-habit-shown form textarea, .add-habit-shown form button, .add-habit-shown form #cadence, .add-habit-shown form label {
       margin: 15px 0; }
   .add-habit-shown #cadence {
     display: flex;

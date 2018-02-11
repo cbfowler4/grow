@@ -23,7 +23,10 @@ class HabitsList extends React.Component {
 
     this.defaultState = {
       title: "",
-      description: ""
+      description: "",
+      pts: 0,
+      cadence: 0,
+      cadenceState: 'hours'
     };
     this.state= this.defaultState;
 
@@ -58,57 +61,65 @@ class HabitsList extends React.Component {
   }
 
   render() {
-    if (this.props.user) {
-      const habitsList = this.props.user.habits.map((habit)=>{
-        return (<Habit habit={habit}/>);
-      });
+    const habitsList = this.props.user.habits.map((habit)=>{
+      return (<Habit habit={habit}/>);
+    });
 
-      const addHabit = this.props.addHabitStatus ? (
-        <div className='add-habit-shown'>
-          <form>
-            <input
-              type='text'
-              placeholder='Enter Habit'
-              value={this.state.title}
-              onChange={this.handleChange('title')}/>
+    const addHabit = this.props.addHabitStatus ? (
+      <div className='add-habit-shown'>
+        <form>
+          <input
+            type='text'
+            placeholder='Enter Habit'
+            value={this.state.title}
+            onChange={this.handleChange('title')}/>
 
-            <textarea
-              placeholder='Enter a short description (optional)...'
-              value={this.state.description}
-              onChange={this.handleChange('description')}></textarea>
+          <textarea
+            placeholder='Enter a short description (optional)...'
+            value={this.state.description}
+            onChange={this.handleChange('description')}></textarea>
 
 
-            <div id='cadence'>
-              <span>To be completed every </span>
-              <div>
-                <input type="number"></input>
-                <select>
-                  <option value="hours">Hours</option>
-                  <option value="days">Days</option>
-                  <option value="weeks">Weeks</option>
-                  <option value="months">Months</option>
-                </select>
-              </div>
+          <div id='cadence'>
+            <span>To be completed every: </span>
+            <div>
+              <input
+                type="number"
+                onChange={this.handleChange('cadence')}
+                value={this.state.cadence}></input>
+              <select value={this.state.cadenceState}
+                onChange={this.handleChange('cadenceState')}>
+                <option value="hours">Hours</option>
+                <option value="days">Days</option>
+                <option value="weeks">Weeks</option>
+                <option value="months">Months</option>
+              </select>
             </div>
-            <button onClick={this.handleHabitSubmit}>Add Habit</button>
-          </form>
-          <button onClick={this.toggleShowAddition}>Hide habit addition</button>
-        </div>
-      ) : (
-        <div className="add-habit-hidden">
-          <button onClick={this.toggleShowAddition}>Add a habit</button>
-        </div>
-      );
+          </div>
 
-      return (
-        <ul className='habits-list'>start of habits list
-          {habitsList}
-          {addHabit}
-        </ul>
-      );
-    } else {
-      return (null);
-    }
+          <label><span>Point value: </span>
+            <input
+              type="number"
+              value={this.state.pts}
+              onChange={this.handleChange('pts')}></input> pts
+          </label>
+
+          <button onClick={this.handleHabitSubmit}>Add Habit</button>
+        </form>
+        <button onClick={this.toggleShowAddition}>Hide habit addition</button>
+      </div>
+    ) : (
+      <div className="add-habit-hidden">
+        <button onClick={this.toggleShowAddition}>Add a habit</button>
+      </div>
+    );
+
+    return (
+      <ul className='habits-list'>start of habits list
+        {habitsList}
+        {addHabit}
+      </ul>
+    );
   }
 }
 

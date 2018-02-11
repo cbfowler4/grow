@@ -24606,13 +24606,17 @@ var Profile = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { className: 'profile' },
-        _react2.default.createElement(_profile_photos2.default, null),
-        'yo im a profile',
-        _react2.default.createElement(_habits_list2.default, { user: this.props.user })
-      );
+      if (this.props.user) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'profile' },
+          _react2.default.createElement(_profile_photos2.default, null),
+          'yo im ' + this.props.user.username + '\'s profile',
+          _react2.default.createElement(_habits_list2.default, { user: this.props.user })
+        );
+      } else {
+        return null;
+      }
     }
   }]);
 
@@ -43577,7 +43581,10 @@ var HabitsList = function (_React$Component) {
 
     _this.defaultState = {
       title: "",
-      description: ""
+      description: "",
+      pts: 0,
+      cadence: 0,
+      cadenceState: 'hours'
     };
     _this.state = _this.defaultState;
 
@@ -43620,95 +43627,109 @@ var HabitsList = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      if (this.props.user) {
-        var habitsList = this.props.user.habits.map(function (habit) {
-          return _react2.default.createElement(_habit2.default, { habit: habit });
-        });
+      var habitsList = this.props.user.habits.map(function (habit) {
+        return _react2.default.createElement(_habit2.default, { habit: habit });
+      });
 
-        var addHabit = this.props.addHabitStatus ? _react2.default.createElement(
-          'div',
-          { className: 'add-habit-shown' },
+      var addHabit = this.props.addHabitStatus ? _react2.default.createElement(
+        'div',
+        { className: 'add-habit-shown' },
+        _react2.default.createElement(
+          'form',
+          null,
+          _react2.default.createElement('input', {
+            type: 'text',
+            placeholder: 'Enter Habit',
+            value: this.state.title,
+            onChange: this.handleChange('title') }),
+          _react2.default.createElement('textarea', {
+            placeholder: 'Enter a short description (optional)...',
+            value: this.state.description,
+            onChange: this.handleChange('description') }),
           _react2.default.createElement(
-            'form',
-            null,
-            _react2.default.createElement('input', {
-              type: 'text',
-              placeholder: 'Enter Habit',
-              value: this.state.title,
-              onChange: this.handleChange('title') }),
-            _react2.default.createElement('textarea', {
-              placeholder: 'Enter a short description (optional)...',
-              value: this.state.description,
-              onChange: this.handleChange('description') }),
+            'div',
+            { id: 'cadence' },
             _react2.default.createElement(
-              'div',
-              { id: 'cadence' },
-              _react2.default.createElement(
-                'span',
-                null,
-                'To be completed every '
-              ),
-              _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement('input', { type: 'number' }),
-                _react2.default.createElement(
-                  'select',
-                  null,
-                  _react2.default.createElement(
-                    'option',
-                    { value: 'hours' },
-                    'Hours'
-                  ),
-                  _react2.default.createElement(
-                    'option',
-                    { value: 'days' },
-                    'Days'
-                  ),
-                  _react2.default.createElement(
-                    'option',
-                    { value: 'weeks' },
-                    'Weeks'
-                  ),
-                  _react2.default.createElement(
-                    'option',
-                    { value: 'months' },
-                    'Months'
-                  )
-                )
-              )
+              'span',
+              null,
+              'To be completed every: '
             ),
             _react2.default.createElement(
-              'button',
-              { onClick: this.handleHabitSubmit },
-              'Add Habit'
+              'div',
+              null,
+              _react2.default.createElement('input', {
+                type: 'number',
+                onChange: this.handleChange('cadence'),
+                value: this.state.cadence }),
+              _react2.default.createElement(
+                'select',
+                { value: this.state.cadenceState,
+                  onChange: this.handleChange('cadenceState') },
+                _react2.default.createElement(
+                  'option',
+                  { value: 'hours' },
+                  'Hours'
+                ),
+                _react2.default.createElement(
+                  'option',
+                  { value: 'days' },
+                  'Days'
+                ),
+                _react2.default.createElement(
+                  'option',
+                  { value: 'weeks' },
+                  'Weeks'
+                ),
+                _react2.default.createElement(
+                  'option',
+                  { value: 'months' },
+                  'Months'
+                )
+              )
             )
           ),
           _react2.default.createElement(
-            'button',
-            { onClick: this.toggleShowAddition },
-            'Hide habit addition'
-          )
-        ) : _react2.default.createElement(
-          'div',
-          { className: 'add-habit-hidden' },
+            'label',
+            null,
+            _react2.default.createElement(
+              'span',
+              null,
+              'Point value: '
+            ),
+            _react2.default.createElement('input', {
+              type: 'number',
+              value: this.state.pts,
+              onChange: this.handleChange('pts') }),
+            ' pts'
+          ),
           _react2.default.createElement(
             'button',
-            { onClick: this.toggleShowAddition },
-            'Add a habit'
+            { onClick: this.handleHabitSubmit },
+            'Add Habit'
           )
-        );
+        ),
+        _react2.default.createElement(
+          'button',
+          { onClick: this.toggleShowAddition },
+          'Hide habit addition'
+        )
+      ) : _react2.default.createElement(
+        'div',
+        { className: 'add-habit-hidden' },
+        _react2.default.createElement(
+          'button',
+          { onClick: this.toggleShowAddition },
+          'Add a habit'
+        )
+      );
 
-        return _react2.default.createElement(
-          'ul',
-          { className: 'habits-list' },
-          'start of habits list',
-          habitsList,
-          addHabit
-        );
-      } else {
-        return null;
-      }
+      return _react2.default.createElement(
+        'ul',
+        { className: 'habits-list' },
+        'start of habits list',
+        habitsList,
+        addHabit
+      );
     }
   }]);
 

@@ -30,13 +30,17 @@ class Profile extends React.Component {
   }
 
   render () {
-    return (
-      <div className='profile'>
-        <ProfilePhotos />
-        yo im a profile
-        <HabitsListContainer user={this.props.user}/>
-      </div>
-    );
+    if (this.props.user) {
+      return (
+        <div className='profile'>
+          <ProfilePhotos />
+          {`yo im ${this.props.user.username}\'s profile`}
+          <HabitsListContainer user={this.props.user}/>
+        </div>
+      );
+    } else {
+      return (null);
+    }
   }
 }
 
