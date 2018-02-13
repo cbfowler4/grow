@@ -1,6 +1,6 @@
 import React from 'react';
 import ProfilePhotos from './profile_photos';
-import HabitsListContainer from './habits_list';
+import HabitsListContainer from '../habits/habits_list';
 import { getUserInfo } from '../../actions/user_actions';
 import { connect } from 'react-redux';
 

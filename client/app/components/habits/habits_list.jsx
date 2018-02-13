@@ -3,6 +3,7 @@ import Habit from './habit';
 import { connect } from 'react-redux';
 import { showAddHabit, hideAddHabit } from '../../actions/ui_actions';
 import { withRouter } from 'react-router-dom';
+import { addHabit } from '../../actions/habit_actions';
 
 const mapStateToProps = state  => {
   return {
@@ -14,6 +15,7 @@ const mapDispatchToProps = dispatch => {
   return {
     showAddHabit: () => dispatch(showAddHabit()),
     hideAddHabit: () => dispatch(hideAddHabit()),
+    addHabit: (habit) => dispatch(addHabit(habit))
   };
 };
 
@@ -52,7 +54,7 @@ class HabitsList extends React.Component {
 
   handleHabitSubmit (e) {
     console.log('submitting...');
-    console.log(this.state);
+    this.props.addHabit(this.state);
     this.setState(this.defaultState);
     e.stopPropagation();
   }

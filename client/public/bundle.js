@@ -24554,7 +24554,7 @@ var _profile_photos = __webpack_require__(94);
 
 var _profile_photos2 = _interopRequireDefault(_profile_photos);
 
-var _habits_list = __webpack_require__(130);
+var _habits_list = __webpack_require__(138);
 
 var _habits_list2 = _interopRequireDefault(_habits_list);
 
@@ -43518,7 +43518,159 @@ exports['default'] = thunk;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
 
 /***/ }),
-/* 130 */
+/* 130 */,
+/* 131 */,
+/* 132 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getUserInfo = exports.receiveUserInfoErrors = exports.receiveUserInfo = exports.RECEIVE_USER_ERRORS = exports.RECEIVE_USER = undefined;
+
+var _user_util = __webpack_require__(133);
+
+var UserUtil = _interopRequireWildcard(_user_util);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var RECEIVE_USER = exports.RECEIVE_USER = 'RECEIVE_USER';
+var RECEIVE_USER_ERRORS = exports.RECEIVE_USER_ERRORS = 'RECEIVE_USER_ERRORS';
+
+var receiveUserInfo = exports.receiveUserInfo = function receiveUserInfo(response) {
+  return {
+    type: RECEIVE_USER,
+    response: response
+  };
+};
+
+var receiveUserInfoErrors = exports.receiveUserInfoErrors = function receiveUserInfoErrors(errors) {
+  return {
+    type: RECEIVE_USER_ERRORS,
+    errors: errors
+  };
+};
+
+var getUserInfo = exports.getUserInfo = function getUserInfo(userId) {
+  return function (dispatch) {
+    UserUtil.getUserInfo(userId).then(function (response) {
+      dispatch(receiveUserInfo(response));
+    }, function (errors) {
+      dispatch(receiveUserInfoErrors(errors));
+    });
+  };
+};
+
+/***/ }),
+/* 133 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var getUserInfo = exports.getUserInfo = function getUserInfo(userId) {
+  return $.ajax({
+    url: '/api/users/' + userId,
+    method: 'get'
+  });
+};
+
+/***/ }),
+/* 134 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _redux = __webpack_require__(24);
+
+var _users_reducer = __webpack_require__(136);
+
+var _users_reducer2 = _interopRequireDefault(_users_reducer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = (0, _redux.combineReducers)({
+  users: _users_reducer2.default
+});
+
+/***/ }),
+/* 135 */,
+/* 136 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _user_actions = __webpack_require__(132);
+
+var _lodash = __webpack_require__(125);
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments[1];
+
+  switch (action.type) {
+    case _user_actions.RECEIVE_USER:
+      return (0, _lodash.merge)({}, state, _defineProperty({}, action.response._id, action.response));
+    default:
+      return state;
+  }
+};
+
+/***/ }),
+/* 137 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.addHabit = exports.receiveHabit = exports.RECEIVE_HABIT = undefined;
+
+var _habit_util = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../util/habit_util\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+var HabitUtil = _interopRequireWildcard(_habit_util);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var RECEIVE_HABIT = exports.RECEIVE_HABIT = 'RECEIVE_HABIT';
+
+var receiveHabit = exports.receiveHabit = function receiveHabit(habit) {
+  return {
+    type: RECEIVE_HABIT,
+    habit: habit
+  };
+};
+
+var addHabit = exports.addHabit = function addHabit(habit) {
+  return function (dispatch) {
+    HabitUtil.addHabit(habit).then(function (response) {
+      dispatch(receiveHabit(response));
+    });
+  };
+};
+
+/***/ }),
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43534,7 +43686,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _habit = __webpack_require__(131);
+var _habit = __webpack_require__(139);
 
 var _habit2 = _interopRequireDefault(_habit);
 
@@ -43543,6 +43695,8 @@ var _reactRedux = __webpack_require__(45);
 var _ui_actions = __webpack_require__(55);
 
 var _reactRouterDom = __webpack_require__(69);
+
+var _habit_actions = __webpack_require__(137);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -43567,6 +43721,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     hideAddHabit: function hideAddHabit() {
       return dispatch((0, _ui_actions.hideAddHabit)());
+    },
+    addHabit: function addHabit(habit) {
+      return dispatch((0, _habit_actions.addHabit)(habit));
     }
   };
 };
@@ -43617,7 +43774,7 @@ var HabitsList = function (_React$Component) {
     key: 'handleHabitSubmit',
     value: function handleHabitSubmit(e) {
       console.log('submitting...');
-      console.log(this.state);
+      this.props.addHabit(this.state);
       this.setState(this.defaultState);
       e.stopPropagation();
     }
@@ -43739,7 +43896,7 @@ var HabitsList = function (_React$Component) {
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(HabitsList));
 
 /***/ }),
-/* 131 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43787,121 +43944,6 @@ var Habit = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Habit;
-
-/***/ }),
-/* 132 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getUserInfo = exports.receiveUserInfoErrors = exports.receiveUserInfo = exports.RECEIVE_USER_ERRORS = exports.RECEIVE_USER = undefined;
-
-var _user_util = __webpack_require__(133);
-
-var UserUtil = _interopRequireWildcard(_user_util);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-var RECEIVE_USER = exports.RECEIVE_USER = 'RECEIVE_USER';
-var RECEIVE_USER_ERRORS = exports.RECEIVE_USER_ERRORS = 'RECEIVE_USER_ERRORS';
-
-var receiveUserInfo = exports.receiveUserInfo = function receiveUserInfo(response) {
-  return {
-    type: RECEIVE_USER,
-    response: response
-  };
-};
-
-var receiveUserInfoErrors = exports.receiveUserInfoErrors = function receiveUserInfoErrors(errors) {
-  return {
-    type: RECEIVE_USER_ERRORS,
-    errors: errors
-  };
-};
-
-var getUserInfo = exports.getUserInfo = function getUserInfo(userId) {
-  return function (dispatch) {
-    UserUtil.getUserInfo(userId).then(function (response) {
-      dispatch(receiveUserInfo(response));
-    }, function (errors) {
-      dispatch(receiveUserInfoErrors(errors));
-    });
-  };
-};
-
-/***/ }),
-/* 133 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var getUserInfo = exports.getUserInfo = function getUserInfo(userId) {
-  return $.ajax({
-    url: '/api/users/' + userId,
-    method: 'get'
-  });
-};
-
-/***/ }),
-/* 134 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _redux = __webpack_require__(24);
-
-var _users_reducer = __webpack_require__(136);
-
-var _users_reducer2 = _interopRequireDefault(_users_reducer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = (0, _redux.combineReducers)({
-  users: _users_reducer2.default
-});
-
-/***/ }),
-/* 135 */,
-/* 136 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _user_actions = __webpack_require__(132);
-
-var _lodash = __webpack_require__(125);
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-exports.default = function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var action = arguments[1];
-
-  switch (action.type) {
-    case _user_actions.RECEIVE_USER:
-      return (0, _lodash.merge)({}, state, _defineProperty({}, action.response._id, action.response));
-    default:
-      return state;
-  }
-};
 
 /***/ })
 /******/ ]);
