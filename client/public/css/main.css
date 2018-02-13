@@ -10,9 +10,11 @@ h1, h2, div, p, li, ul, body, html, aside, main {
 .nav {
   display: flex;
   justify-content: space-between;
-  padding: 15px;
+  align-items: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  background-color: #EDF5E1; }
+  background-color: #EDF5E1;
+  padding: 0 20px 0 25px;
+  height: 70px; }
   .nav .left h1 {
     font-family: 'Frank Ruhl Libre', serif;
     font-size: 36px;
