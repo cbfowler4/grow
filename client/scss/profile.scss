@@ -48,6 +48,13 @@
     flex-direction: column;
     justify-content: space-between;
   }
+  button {
+    border: none;
+    padding: 8px;
+    background-color: green;
+    border-radius: 5px;
+
+  }
 }
 
 .add-habit-shown {
