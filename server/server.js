@@ -33,4 +33,11 @@ app.post('/api/users/:_userId/habit', (req, res) => {
   });
 });
 
+app.delete('/api/users/:_userId/habit/:_habitId', (req, res) => {
+  UserModel.removeHabit(req.params._userId, req.params._habitId)
+    .then((response) => {
+      res.send(response);
+    });
+});
+
 app.listen(3000);

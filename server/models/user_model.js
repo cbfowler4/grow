@@ -50,7 +50,12 @@ const getUser = (userId) => {
 };
 
 const addHabit = (habit) => {
-
+  // find user, append to array of habits, return new habit
+  // return User.findById(habit.userId)
 };
 
-module.exports = { createUser, isUser, getUser};
+const removeHabit = (userId, habitId) => {
+  // find user, remove habit with corresponding id, return success
+};
+
+module.exports = { createUser, isUser, getUser, addHabit, removeHabit};

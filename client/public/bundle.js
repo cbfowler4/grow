@@ -43636,48 +43636,10 @@ exports.default = function () {
 
 /***/ }),
 /* 137 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.addHabit = exports.receiveHabitErrors = exports.receiveHabit = exports.RECEIVE_HABIT_ERRORS = exports.RECEIVE_HABIT = undefined;
-
-var _habit_util = __webpack_require__(140);
-
-var HabitUtil = _interopRequireWildcard(_habit_util);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-var RECEIVE_HABIT = exports.RECEIVE_HABIT = 'RECEIVE_HABIT';
-var RECEIVE_HABIT_ERRORS = exports.RECEIVE_HABIT_ERRORS = 'RECEIVE_HABIT_ERRORS';
-
-var receiveHabit = exports.receiveHabit = function receiveHabit(habit) {
-  return {
-    type: RECEIVE_HABIT,
-    habit: habit
-  };
-};
-
-var receiveHabitErrors = exports.receiveHabitErrors = function receiveHabitErrors(errors) {
-  return {
-    type: RECEIVE_HABIT_ERRORS,
-    errors: errors
-  };
-};
-
-var addHabit = exports.addHabit = function addHabit(habit) {
-  return function (dispatch) {
-    HabitUtil.addHabit(habit).then(function (response) {
-      dispatch(receiveHabit(response));
-    }, function (errors) {
-      dispatch(receiveHabitErrors(errors));
-    });
-  };
-};
+throw new Error("Module build failed: SyntaxError: `removeHabit` has already been exported. Exported identifiers must be unique. (39:13)\n\n\u001b[0m \u001b[90m 37 | \u001b[39m}\u001b[33m;\u001b[39m\n \u001b[90m 38 | \u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 39 | \u001b[39m\u001b[36mexport\u001b[39m \u001b[36mconst\u001b[39m removeHabit \u001b[33m=\u001b[39m (habit) \u001b[33m=>\u001b[39m {\n \u001b[90m    | \u001b[39m             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 40 | \u001b[39m  \u001b[36mreturn\u001b[39m (dispatch) \u001b[33m=>\u001b[39m {\n \u001b[90m 41 | \u001b[39m      \u001b[33mHabitUtil\u001b[39m\u001b[33m.\u001b[39mremoveHabit(habit)\u001b[33m.\u001b[39mthen((response)\u001b[33m=>\u001b[39m{\n \u001b[90m 42 | \u001b[39m        dispatch(removeHabit(response))\u001b[33m;\u001b[39m\u001b[0m\n");
 
 /***/ }),
 /* 138 */
@@ -43955,24 +43917,6 @@ var Habit = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Habit;
-
-/***/ }),
-/* 140 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var addHabit = exports.addHabit = function addHabit(habit) {
-  return $.ajax({
-    url: "/api/users/" + habit.userId + "/habit",
-    method: "post",
-    data: habit
-  });
-};
 
 /***/ })
 /******/ ]);

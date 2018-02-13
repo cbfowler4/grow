@@ -5,3 +5,11 @@ export const addHabit = (habit) => {
     data: habit
   });
 };
+
+export const removeHabit = (userId, habitId) => {
+  return $.ajax({
+    url: `/api/users/${userId}/habit/${habitId}`,
+    method: "post",
+    data: habit
+  });
+};
