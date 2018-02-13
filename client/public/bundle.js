@@ -43644,15 +43644,16 @@ exports.default = function () {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.addHabit = exports.receiveHabit = exports.RECEIVE_HABIT = undefined;
+exports.addHabit = exports.receiveHabitErrors = exports.receiveHabit = exports.RECEIVE_HABIT_ERRORS = exports.RECEIVE_HABIT = undefined;
 
-var _habit_util = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../util/habit_util\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _habit_util = __webpack_require__(140);
 
 var HabitUtil = _interopRequireWildcard(_habit_util);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 var RECEIVE_HABIT = exports.RECEIVE_HABIT = 'RECEIVE_HABIT';
+var RECEIVE_HABIT_ERRORS = exports.RECEIVE_HABIT_ERRORS = 'RECEIVE_HABIT_ERRORS';
 
 var receiveHabit = exports.receiveHabit = function receiveHabit(habit) {
   return {
@@ -43661,10 +43662,19 @@ var receiveHabit = exports.receiveHabit = function receiveHabit(habit) {
   };
 };
 
+var receiveHabitErrors = exports.receiveHabitErrors = function receiveHabitErrors(errors) {
+  return {
+    type: RECEIVE_HABIT_ERRORS,
+    errors: errors
+  };
+};
+
 var addHabit = exports.addHabit = function addHabit(habit) {
   return function (dispatch) {
     HabitUtil.addHabit(habit).then(function (response) {
       dispatch(receiveHabit(response));
+    }, function (errors) {
+      dispatch(receiveHabitErrors(errors));
     });
   };
 };
@@ -43741,7 +43751,8 @@ var HabitsList = function (_React$Component) {
       description: "",
       pts: 0,
       cadence: 0,
-      cadenceState: 'hours'
+      cadenceState: 'hours',
+      userId: props.user._id
     };
     _this.state = _this.defaultState;
 
@@ -43944,6 +43955,24 @@ var Habit = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Habit;
+
+/***/ }),
+/* 140 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var addHabit = exports.addHabit = function addHabit(habit) {
+  return $.ajax({
+    url: "/api/users/" + habit.userId + "/habit",
+    method: "post",
+    data: habit
+  });
+};
 
 /***/ })
 /******/ ]);

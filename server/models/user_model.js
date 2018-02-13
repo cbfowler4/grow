@@ -49,4 +49,8 @@ const getUser = (userId) => {
   });
 };
 
+const addHabit = (habit) => {
+
+};
+
 module.exports = { createUser, isUser, getUser};

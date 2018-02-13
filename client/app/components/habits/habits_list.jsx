@@ -22,13 +22,14 @@ const mapDispatchToProps = dispatch => {
 class HabitsList extends React.Component {
   constructor(props) {
     super(props);
-
+    
     this.defaultState = {
       title: "",
       description: "",
       pts: 0,
       cadence: 0,
-      cadenceState: 'hours'
+      cadenceState: 'hours',
+      userId: props.user._id
     };
     this.state= this.defaultState;
 

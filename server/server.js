@@ -27,4 +27,10 @@ app.get('/api/users/:_userId', (req, res) => {
   });
 });
 
+app.post('/api/users/:_userId/habit', (req, res) => {
+  UserModel.addHabit(req.body).then((response)=>{
+    res.send(response);
+  });
+});
+
 app.listen(3000);
